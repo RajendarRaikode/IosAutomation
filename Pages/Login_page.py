@@ -30,6 +30,9 @@ class Login_page(BasePage):
     def get_SIGNIN_click(self):
         return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.SIGNIN_BUTTON)
 
+    def get_invalid_emailpassword(self):
+        return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.INVALID_CREDENTIALS)
+
     def get_savePassword_message(self):
         return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.SAVE_PASSWORD_MESSAGE).text
 
@@ -51,6 +54,14 @@ class Login_page(BasePage):
         # 'Kidde' would like to access your Home Data
         self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'OK').click()
 
+    def get_notification_access(self):
+        # Kidde notifications permision
+        Notification_access = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'Allow')
+        if Notification_access.is_displayed():
+            Notification_access.click()
+        else:
+            pass
+
 
     def Kidde_app_login(self, username, password):
         #Page Heading check
@@ -63,10 +74,7 @@ class Login_page(BasePage):
         self.get_password(password)
         self.get_SIGNIN_click().click()
         self.event_click(AppiumBy.ACCESSIBILITY_ID, self.SIGNIN_BUTTON)
-        #Kidde notifications permision
-        Notification_access = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'Allow')
-        if Notification_access.is_displayed():
-            Notification_access.click()
+
     #@pytest.fixture()
     @pytest.mark.parametrize("username, password", [("rajendar.raikode@carrie.com", "Carrier@123"),
                                                     ("rajendar.raikode@carrier.com", "carrier@123"),
