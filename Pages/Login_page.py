@@ -10,6 +10,15 @@ class Login_page(BasePage):
     PASSWORD = 'LoginViewControllerIdentifier_passwordTextField'
     SHOW_PASSWORD_ICON = 'InputFiled_textFieldSecureButtonToggle'
     SIGNIN_BUTTON = 'LoginViewControllerIdentifier_signinButton'
+    FORGOT_PASSWORD_TEXT = 'Forgot your password?'
+    NEW_HERE_TEXT = 'New here?'
+    CREATE_ACCOUNT_TEXT = 'Create an account'
+    CREATE_AN_ACCOUNT_TITLE = 'titleLabel'
+    TERMS_AND_CONDITIONS_TEXT = 'By accessing or using the Kidde App, you acknowledge and agree that you have read, understand, and agree to be bound by Kidde’s Terms of Service and Privacy Policy.'
+    TERMS_OF_SERVICE_LINKTEXT = 'Terms of Service'
+    TERMS_OF_SERVICE_TITLE = 'Terms of Service'
+    PRIVACY_POLICY_LINKTEXT = 'Privacy Policy'
+    PRIVACY_POLICY_TITLE = 'Privacy Policy'
     SAVE_PASSWORD_MESSAGE = 'You can view and remove saved passwords in Passwords settings.'
     SAVE_PASSWORD = 'Save Password'
     NOT_SAVE_PASSWORD = 'Not Now'
@@ -27,8 +36,28 @@ class Login_page(BasePage):
         self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.EMAILID).send_keys(username)
     def get_password(self,password):
         self.event_send_keys(self.PASSWORD, password)
+
+    def get_showpassword(self):
+        return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.SHOW_PASSWORD_ICON)
     def get_SIGNIN_click(self):
         return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.SIGNIN_BUTTON)
+
+    def get_ForgotyourPassword_linktext(self):
+        return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.FORGOT_PASSWORD_TEXT)
+
+    def get_NewHere_text(self):
+        return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.NEW_HERE_TEXT)
+
+    def get_CreateAccount_linktext(self):
+        return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.CREATE_ACCOUNT_TEXT)
+    def get_terms_and_conditions_text(self):
+        return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.TERMS_AND_CONDITIONS_TEXT)
+
+    def get_termsOfService_linktext(self):
+        return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.TERMS_OF_SERVICE_LINKTEXT)
+
+    def get_privacyPolicy_linktext(self):
+        return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.PRIVACY_POLICY_LINKTEXT)
 
     def get_invalid_emailpassword(self):
         return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, self.INVALID_CREDENTIALS)
@@ -62,6 +91,15 @@ class Login_page(BasePage):
         else:
             pass
 
+    def forgotPassword_link_action(self):
+        return self.wait_element_to_be_clickable(AppiumBy.ACCESSIBILITY_ID, self.CREATE_ACCOUNT_TEXT )
+        #self.get_ForgotyourPassword_linktext().click()
+
+    def terms_of_Service_link_action(self):
+        self.get_termsOfService_linktext().click()
+
+    def privacy_policy_link_action(self):
+        self.get_privacyPolicy_linktext().click()
 
     def Kidde_app_login(self, username, password):
         #Page Heading check
@@ -82,6 +120,8 @@ class Login_page(BasePage):
     def Kidde_Invalid_Credentials(self,username, password):
         self.Kidde_app_login(username, password)
         print("Invalid credentials, Please provide valid username and password")
+
+
 
 
     def SavePasswordCheck(self):
