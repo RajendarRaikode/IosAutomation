@@ -3,6 +3,8 @@ from appium.webdriver.common.appiumby import AppiumBy
 from Pages.Basepage import BasePage
 from config import config
 
+#
+
 class Login_page(BasePage):
 
     SignIn_Heading_Check = "LoginViewControllerIdentifier_titleLabel"
@@ -92,8 +94,8 @@ class Login_page(BasePage):
             pass
 
     def forgotPassword_link_action(self):
-        return self.wait_element_to_be_clickable(AppiumBy.ACCESSIBILITY_ID, self.CREATE_ACCOUNT_TEXT )
-        #self.get_ForgotyourPassword_linktext().click()
+        #return self.wait_element_to_be_clickable(AppiumBy.ACCESSIBILITY_ID, self.CREATE_ACCOUNT_TEXT )
+        self.get_ForgotyourPassword_linktext().click()
 
     def terms_of_Service_link_action(self):
         self.get_termsOfService_linktext().click()
